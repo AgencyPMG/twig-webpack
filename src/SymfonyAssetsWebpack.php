@@ -36,12 +36,17 @@ final class SymfonyAssetsWebpack extends AbstractWebpack
 
     public static function fromDevServerUrl($devMode, $devServer)
     {
-        return new self($devMode, new UrlPackage($devServer, new EmptyVersionStrategy()));
+        return new self($devMode, self::createPackage($devServer));
     }
 
     public static function createDefault($devMode)
     {
         return self::fromDevServerUrl($devMode, 'http://localhost:8080');
+    }
+
+    public static function createPackage($devServer)
+    {
+        return new UrlPackage($devServer, new EmptyVersionStrategy());
     }
 
     /**
