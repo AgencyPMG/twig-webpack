@@ -27,7 +27,7 @@ final class PmgTwigWebpackExtension extends ConfigurableExtension
     public static function createWebpack(Packages $packages=null, $devMode, $baseUrl)
     {
         if (!$packages) {
-            return new SimpleWebpack($devModek, $baseUrl);
+            return new SimpleWebpack($devMode, $baseUrl);
         }
 
         try {
