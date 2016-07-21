@@ -54,6 +54,6 @@ final class SymfonyAssetsWebpack extends AbstractWebpack
      */
     public function getUrl($path)
     {
-        return $this->webpackPackage->getUrl($path);
+        return $this->webpackPackage->getUrl(basename($path));
     }
 }

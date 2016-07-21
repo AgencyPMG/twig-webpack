@@ -25,4 +25,11 @@ class SimpleWebpackTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://localhost:8080/test.js', $wb->getUrl('test.js'));
     }
+
+    public function testGetUrlStripsAllButTheBasenameFromThePath()
+    {
+        $wb = new SimpleWebpack(true);
+
+        $this->assertEquals('http://localhost:8080/test.js', $wb->getUrl('sub/directory/test.js'));
+    }
 }

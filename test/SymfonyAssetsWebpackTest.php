@@ -18,4 +18,11 @@ class SymfonyAssetsWebpackTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://localhost:8080/test.js', $wb->getUrl('test.js'));
     }
+
+    public function testGetUrlStripsAllButTheBasenameFromThePath()
+    {
+        $wb = SymfonyAssetsWebpack::createDefault(true);
+
+        $this->assertEquals('http://localhost:8080/test.js', $wb->getUrl('/path/to/subdir/test.js'));
+    }
 }

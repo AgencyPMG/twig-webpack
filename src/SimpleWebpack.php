@@ -35,10 +35,6 @@ final class SimpleWebpack extends AbstractWebpack
      */
     public function getUrl($path)
     {
-        if ($path && '/' !== $path[0]) {
-            $path = '/'.$path;
-        }
-
-        return $this->baseUrl.$path;
+        return sprintf('%s/%s', $this->baseUrl, basename($path));
     }
 }
