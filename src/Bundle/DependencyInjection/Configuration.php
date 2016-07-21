@@ -31,7 +31,7 @@ final class Configuration implements ConfigurationInterface
                 ->info('The webpack dev server base URL')
             ->end()
             ->booleanNode('dev_mode')
-                ->defaultValue(false)
+                ->defaultValue('%kernel.debug%')
                 ->info('Whether or not to put the bundle in dev mode (serve assets from the webpack dev server)')
             ->end()
         ;
