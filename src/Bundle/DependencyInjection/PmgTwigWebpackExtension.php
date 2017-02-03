@@ -11,7 +11,10 @@
 namespace PMG\TwigWebpack\Bundle\DependencyInjection;
 
 use Symfony\Component\Asset\Packages;
+use Symfony\Component\Asset\UrlPackage;
+use Symfony\Component\Asset\Context\ContextInterface as AssetContext;
 use Symfony\Component\Asset\Exception\InvalidArgumentException;
+Use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
@@ -24,8 +27,12 @@ use PMG\TwigWebpack\Twig\WebpackExtension;
 
 final class PmgTwigWebpackExtension extends ConfigurableExtension
 {
-    public static function createWebpack(Packages $packages=null, $devMode, $baseUrl)
-    {
+    public static function createWebpack(
+        Packages $packages=null,
+        AssetContext $context=null,
+        $devMode,
+        $baseUrl
+    ) {
         if (!$packages) {
             return new SimpleWebpack($devMode, $baseUrl);
         }
@@ -33,7 +40,7 @@ final class PmgTwigWebpackExtension extends ConfigurableExtension
         try {
             $package = $packages->getPackage('webpack');
         } catch (InvalidArgumentException $e) {
-            $package = SymfonyAssetsWebpack::createPackage($baseUrl);
+            $package = new UrlPackage($baseUrl, new EmptyVersionStrategy(), $context);
             $packages->addPackage('webpack', $package);
         }
 
@@ -51,6 +58,7 @@ final class PmgTwigWebpackExtension extends ConfigurableExtension
 
         $container->setDefinition('pmg_twig_webpack.webpack', new Definition(Webpack::class, [
                 new Reference('assets.packages', ContainerInterface::NULL_ON_INVALID_REFERENCE),
+                new Reference('assets.context', ContainerInterface::NULL_ON_INVALID_REFERENCE),
                 '%pmg_twig_webpack.dev_mode%',
                 '%pmg_twig_webpack.base_url%',
             ]))
