@@ -1,0 +1,11 @@
+language: php
+
+# the 7.X version of PHP will get twig 2.X
+php:
+  - "5.6"
+  - "7.0"
+  - "7.1"
+
+install: composer install
+
+script: php vendor/bin/phpunit
