@@ -19,7 +19,7 @@ final class WebpackNode extends \Twig_Node
      */
     private $webpack;
 
-    public function __construct(Webpack $webpack, \Twig_NodeInterface $body, $lineno, $tag)
+    public function __construct(Webpack $webpack, \Twig_Node $body, $lineno, $tag)
     {
         parent::__construct(['body' => $body], [], $lineno, $tag);
         $this->webpack = $webpack;

@@ -37,7 +37,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
             return new \Twig_Node_Expression_Function(
                 'webpack_asset',
                 $node->getNode('arguments'),
-                $node->getLine()
+                $node->getTemplateLine()
             );
         }
 
