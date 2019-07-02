@@ -13,14 +13,9 @@ namespace PMG\TwigWebpack\Bundle\DependencyInjection;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Asset\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use PMG\TwigWebpack\SimpleWebpack;
 use PMG\TwigWebpack\SymfonyAssetsWebpack;
-use PMG\TwigWebpack\Webpack;
-use PMG\TwigWebpack\Twig\WebpackExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
