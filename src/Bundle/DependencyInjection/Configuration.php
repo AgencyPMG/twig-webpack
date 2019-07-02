@@ -20,8 +20,8 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $tree = new TreeBuilder();
-        $root = $tree->root('pmg_twig_webpack');
+        $tree = new TreeBuilder('pmg_twig_webpack');
+        $root = $tree->getRootNode();
 
         $root
             ->children()
