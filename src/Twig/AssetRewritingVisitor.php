@@ -10,7 +10,11 @@
 
 namespace PMG\TwigWebpack\Twig;
 
-class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
+use Twig\Node\Node;
+use Twig\Environment;
+use Twig\NodeVisitor\AbstractNodeVisitor;
+
+class AssetRewritingVisitor extends AbstractNodeVisitor
 {
     /**
      * {@inheritdoc}
@@ -23,7 +27,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
     /**
      * {@inheritdoc}
      */
-    protected function doEnterNode(\Twig_Node $node, \Twig\Environment $env)
+    protected function doEnterNode(Node $node, Environment $env)
     {
         return $node;
     }
@@ -31,7 +35,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
     /**
      * {@inheritdoc}
      */
-    protected function doLeaveNode(\Twig_Node $node, \Twig\Environment $env)
+    protected function doLeaveNode(Node $node, Environment $env)
     {
         if ($this->isAssetFunction($node) && $env->getFunction('webpack_asset')) {
             return new \Twig_Node_Expression_Function(
@@ -44,7 +48,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
         return $node;
     }
 
-    private function isAssetFunction(\Twig_Node $node)
+    private function isAssetFunction(Node $node)
     {
         return $node instanceof \Twig_Node_Expression_Function && $node->getAttribute('name') === 'asset';
     }

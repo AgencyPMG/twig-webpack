@@ -11,8 +11,10 @@
 namespace PMG\TwigWebpack\Twig;
 
 use PMG\TwigWebpack\Webpack;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-final class WebpackExtension extends \Twig\Extension\AbstractExtension
+final class WebpackExtension extends AbstractExtension
 {
     /**
      * @var Webpack
@@ -40,7 +42,7 @@ final class WebpackExtension extends \Twig\Extension\AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('webpack_asset', [$this, 'getWebpackUrl']),
+            new TwigFunction('webpack_asset', [$this, 'getWebpackUrl']),
         ];
     }
 

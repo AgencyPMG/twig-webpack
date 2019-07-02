@@ -11,15 +11,19 @@
 namespace PMG\TwigWebpack\Twig;
 
 use PMG\TwigWebpack\Webpack;
+use Twig\Node\Node;
+use Twig\Environment;
+use Twig\Compiler;
+use Twig\NodeTraverser;
 
-final class WebpackNode extends \Twig_Node
+final class WebpackNode extends Node
 {
     /**
      * @var Webpack
      */
     private $webpack;
 
-    public function __construct(Webpack $webpack, \Twig_Node $body, $lineno, $tag)
+    public function __construct(Webpack $webpack, Node $body, $lineno, $tag)
     {
         parent::__construct(['body' => $body], [], $lineno, $tag);
         $this->webpack = $webpack;
@@ -28,7 +32,7 @@ final class WebpackNode extends \Twig_Node
     /**
      * {@inheritdoc}
      */
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         $compiler->addDebugInfo($this);
         $body = $this->getNode('body');
@@ -47,9 +51,9 @@ final class WebpackNode extends \Twig_Node
         $compiler->subcompile($body);
     }
 
-    private function rewriteAssetFunctions(\Twig_Node $node, \Twig\Environment $env)
+    private function rewriteAssetFunctions(Node $node, Environment $env)
     {
-        $traverser = new \Twig_NodeTraverser($env, [
+        $traverser = new NodeTraverser($env, [
             new AssetRewritingVisitor(),
         ]);
         return $traverser->traverse($node);

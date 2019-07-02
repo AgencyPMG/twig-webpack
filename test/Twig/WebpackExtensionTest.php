@@ -17,6 +17,8 @@ use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use PMG\TwigWebpack\Webpack;
 use PMG\TwigWebpack\SimpleWebpack;
 use PMG\TwigWebpack\SymfonyAssetsWebpack;
+use Twig\Loader\ArrayLoader;
+use Twig\Environment;
 
 class WebpackExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,7 +52,7 @@ EOF
 
     private static function createTwig(Webpack $webpack, array $templates)
     {
-        $twig = new \Twig\Environment(new \Twig\Loader\ArrayLoader($templates));
+        $twig = new Environment(new ArrayLoader($templates));
         $twig->addExtension(new WebpackExtension($webpack));
 
         return $twig;
