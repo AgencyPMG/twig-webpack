@@ -21,6 +21,8 @@ use PMG\TwigWebpack\SimpleWebpack;
 use PMG\TwigWebpack\SymfonyAssetsWebpack;
 use PMG\TwigWebpack\Webpack;
 use PMG\TwigWebpack\Twig\WebpackExtension;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class PmgTwigWebpackExtension extends ConfigurableExtension
 {
@@ -45,20 +47,15 @@ final class PmgTwigWebpackExtension extends ConfigurableExtension
      */
     protected function loadInternal(array $config, ContainerBuilder $container)
     {
+        $loader = new XmlFileLoader(
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
+
         foreach ($config as $key => $val) {
             $container->setParameter(sprintf('pmg_twig_webpack.%s', $key), $val);
         }
 
-        $container->setDefinition('pmg_twig_webpack.webpack', new Definition(Webpack::class, [
-                new Reference('assets.packages', ContainerInterface::NULL_ON_INVALID_REFERENCE),
-                '%pmg_twig_webpack.dev_mode%',
-                '%pmg_twig_webpack.base_url%',
-            ]))
-            ->setFactory([__CLASS__, 'createWebpack']);
-
-        $container->setDefinition('pmg_twig_webpack.extension', new Definition(
-            WebpackExtension::class,
-            [new Reference('pmg_twig_webpack.webpack')]
-        ))->addTag('twig.extension');
+        $loader->load('services.xml');
     }
 }

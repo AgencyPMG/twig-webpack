@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <defaults public="true" />
+
+        <service id="pmg_twig_webpack.webpack" class="PMG\TwigWebpack\Webpack">
+            <factory class="PMG\TwigWebpack\Bundle\DependencyInjection\PmgTwigWebpackExtension" method="createWebpack" />
+            <argument type="service" id="assets.packages" on-invalid="null" />
+            <argument>%pmg_twig_webpack.dev_mode%</argument>
+            <argument>%pmg_twig_webpack.base_url%</argument>
+        </service>
+
+        <service id="pmg_twig_webpack.extension" class="PMG\TwigWebpack\Webpack">
+            <argument>pmg_twig_webpack.webpack</argument>
+            <tag name="twig.extensionr" />
+        </service>
+
+    </services>
+</container>

@@ -29,7 +29,7 @@ class PmgTwigWebpackExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(SimpleWebpack::class, $wb);
     }
 
-    public function testContainerWithAssetsAvailableCreatesSymfonyAssetsWebpack()
+    public function testContainerWithAssetsAvailableCreatesSymfonyAssetsWebpack() //this
     {
         $c = $this->createContainer();
         $c->set('assets.packages', new Packages(new Package(new EmptyVersionStrategy())));
