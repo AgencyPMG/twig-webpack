@@ -12,7 +12,7 @@ namespace PMG\TwigWebpack\Twig;
 
 use PMG\TwigWebpack\Webpack;
 
-final class WebpackExtension extends \Twig_Extension
+final class WebpackExtension extends \Twig\Extension\AbstractExtension
 {
     /**
      * @var Webpack

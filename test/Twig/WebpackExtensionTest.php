@@ -50,7 +50,7 @@ EOF
 
     private static function createTwig(Webpack $webpack, array $templates)
     {
-        $twig = new \Twig_Environment(new \Twig_Loader_Array($templates));
+        $twig = new \Twig\Environment(new \Twig\Loader\ArrayLoader($templates));
         $twig->addExtension(new WebpackExtension($webpack));
 
         return $twig;

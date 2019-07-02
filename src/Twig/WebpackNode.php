@@ -47,7 +47,7 @@ final class WebpackNode extends \Twig_Node
         $compiler->subcompile($body);
     }
 
-    private function rewriteAssetFunctions(\Twig_Node $node, \Twig_Environment $env)
+    private function rewriteAssetFunctions(\Twig_Node $node, \Twig\Environment $env)
     {
         $traverser = new \Twig_NodeTraverser($env, [
             new AssetRewritingVisitor(),

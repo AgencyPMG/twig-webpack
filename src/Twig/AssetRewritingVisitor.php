@@ -23,7 +23,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
     /**
      * {@inheritdoc}
      */
-    protected function doEnterNode(\Twig_Node $node, \Twig_Environment $env)
+    protected function doEnterNode(\Twig_Node $node, \Twig\Environment $env)
     {
         return $node;
     }
@@ -31,7 +31,7 @@ class AssetRewritingVisitor extends \Twig_BaseNodeVisitor
     /**
      * {@inheritdoc}
      */
-    protected function doLeaveNode(\Twig_Node $node, \Twig_Environment $env)
+    protected function doLeaveNode(\Twig_Node $node, \Twig\Environment $env)
     {
         if ($this->isAssetFunction($node) && $env->getFunction('webpack_asset')) {
             return new \Twig_Node_Expression_Function(
