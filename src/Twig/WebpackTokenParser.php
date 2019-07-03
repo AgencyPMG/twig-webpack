@@ -29,10 +29,10 @@ final class WebpackTokenParser extends AbstractTokenParser
     /**
      * {@inheritdoc}
      */
-    public function parse(\Twig\Token $token)
+    public function parse(Token $token)
     {
         $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
-        $body = $this->parser->subparse(function (\Twig\Token $token) {
+        $body = $this->parser->subparse(function (Token $token) {
             return $token->test('endwebpack');
         }, true);
         $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
